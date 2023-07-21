@@ -1,0 +1,16 @@
+.column {
+    border-right: 1px solid #ccc; /* Add a border on the right side of the left column */
+    padding-right: 10px; /* Optional: Add some padding to the right of the left column */
+  }
+  
+  .column:last-child {
+    border-right: none; /* Remove the border on the right side of the right column */
+    padding-right: 0; /* Optional: Remove padding from the right of the right column */
+  }
+  .left-column-scroll {
+    max-height: 500px; /* Set the maximum height for the scrollable container */
+    overflow-y: auto; /* Add vertical scrollbar when content overflows */
+  }
+  input{
+    color: #000;
+  }

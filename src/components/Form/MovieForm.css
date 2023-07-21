@@ -1,0 +1,31 @@
+ h3 {
+    font-size: 40px;
+  }
+  
+  .col {
+    color: #ffa500;
+  }
+  
+  .form-control {
+    background-color: black;
+    opacity: 0.5;
+    color: white;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  
+  .movieLabel {
+    color: #ffa500;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .btn1 {
+    font-size: larger;
+    font-weight: 700;
+    color: black;
+    border-radius: 6px;
+    cursor: pointer;
+  }

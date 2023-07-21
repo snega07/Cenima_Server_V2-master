@@ -1,0 +1,23 @@
+body {
+  background-color: #091321;
+}
+.headP,.bottomP {
+  color: wheat;
+}
+@media (max-width: 767px) {
+
+    .logoc,.headP {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .headP {
+      margin: 1rem;
+
+    }
+
+   }
+
+.statusHandle {
+  margin:1rem;
+}

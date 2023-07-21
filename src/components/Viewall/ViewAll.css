@@ -1,0 +1,44 @@
+
+.vcard {
+margin:0.3rem;
+  margin-top: 0.5rem;
+  border: none;
+box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.7), 0 5px 20px 0 rgba(0, 0, 0, 0.60);
+
+  transition: 0.3s;
+}
+.vcard:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+}
+.card-title {
+  color: wheat;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.btn-primary {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+}
+/*@media screen and (max-width: 768px) {
+
+   .row {
+     display: flex;
+   }
+  .vcard {
+    height: 20rem;
+    width: 40vw
+  }
+  .varcd>img {
+    height: 20rem;
+    width: 12vw;
+  }
+  .coller {
+    height: 50%;
+    flex:50%;
+  }
+ }
+*/

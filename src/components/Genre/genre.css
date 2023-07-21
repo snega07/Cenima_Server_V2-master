@@ -1,0 +1,49 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=IBM+Plex+Sans&family=Nunito:wght@400;500&family=Oswald:wght@500&family=Source+Code+Pro:wght@700&display=swap');
+.sectionTitleG {
+  display: flex;
+  justify-content: space-between;
+  height: 12vh;
+  position: relative;
+
+
+}
+.gcard {
+margin:0.3rem;
+  margin-top: 0.5rem;
+  border: none;
+box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.7), 0 5px 20px 0 rgba(0, 0, 0, 0.60);
+
+}
+#headg {
+  color: #999999;
+  font-family: arial, sans-serif;
+  font-size: 2.5rem;
+  padding: 1.8rem;
+  font-weight: bold;
+  left:13px;
+ }
+
+@media (max-width: 767px) {
+  #headg {
+    width: 50%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 1.6rem;
+    white-space: nowrap;
+  }
+}
+
+
+@media (max-width: 768px) { 
+  .sectionTitle {
+    justify-content: space-between;
+    height: 6vh; 
+    width: 100%;
+   /* flex-direction: column;
+    align-items: flex-start;*/
+  }
+  
+}
+
+

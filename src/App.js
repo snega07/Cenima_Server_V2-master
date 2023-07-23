@@ -6,9 +6,7 @@ import Login from './components/Cred/Login';
 import Signup from './components/Cred/signup';
 import MovieForm from './components/Form/MovieForm';
 import MovieDetailPage from './components/MovieDetail/MovieDetailPage';
-
 import Footer from './components/Footer/footer';
-
 import SearchResult from './components/searchresult/SearchResult';
 import ViewAll from './components/Viewall/ViewAll';
 import Profile from './components/Profile/Profile';

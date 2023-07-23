@@ -14,11 +14,27 @@ const Profile = () => {
     const [myReviews, setMyreviews] = useState([]);
     const navigate = useNavigate();
     const [profileData, setProfileData] = useState({
-
     });
 
-    const fetchReviews = async () => {
-        ReviewService.getAllReviews()
+   
+    useEffect(() => {
+        let storedCreds = localStorage.getItem('user');
+        console.log(storedCreds)
+        if (storedCreds != null) {
+            const parsedCreds = JSON.parse(storedCreds);
+            setCreds(parsedCreds);
+            setIsLoggedIn(true);
+           
+            setIsRole(parsedCreds.user_role[0].authority);
+           fetchReviews();
+            setProfileData(parsedCreds.user)
+        
+        }
+    }, []);
+    console.log()
+  const fetchReviews = async () => {
+    const userId = JSON.parse(localStorage.getItem('user')).user.userId;
+    ReviewService.getSpecificReviews(userId)
             .then((res) => {
                 if (Array.isArray(res.data)) {
                     setReviews(res.data);
@@ -28,20 +44,6 @@ const Profile = () => {
                 console.error("Error fetching Reviews:", error);
             });
     };
-    useEffect(() => {
-        let storedCreds = localStorage.getItem('user');
-        console.log(storedCreds)
-        if (storedCreds != null) {
-            const parsedCreds = JSON.parse(storedCreds);
-            setCreds(parsedCreds);
-            setIsLoggedIn(true);
-            setIsRole(parsedCreds.user_role[0].authority);
-            fetchReviews();
-            setProfileData(parsedCreds.user)
-        }
-    }, []);
-
-
     useEffect(() => {
 
         separateReviews();

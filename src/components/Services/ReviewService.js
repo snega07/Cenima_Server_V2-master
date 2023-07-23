@@ -27,8 +27,8 @@ class ReviewService {
          return axios.put(Review_API_BASE_URL2 + '/' + reviewId, review);
      }
 
-     getAllReviews(){
-        return axios.get(Review_API_BASE_URL1);
+     getSpecificReviews(userId){
+        return axios.get(Review_API_BASE_URL1+'/specific/'+userId);
      }
 
 }

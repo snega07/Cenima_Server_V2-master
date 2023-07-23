@@ -65,6 +65,7 @@ const MovieForm = (props) => {
       
       MovieServices.getMovieById(movieData.id).then((res) => {
         let existingMovieData = res.data;
+        const collectionValue =existingMovieData.collection.split(' ')[0];
         setMovieData({
           title: existingMovieData.title,
           director: existingMovieData.director,
@@ -72,32 +73,27 @@ const MovieForm = (props) => {
           motionPictureRating: existingMovieData.motionPictureRating,
           movieDesc: existingMovieData.movieDesc,
           casts: [],
-          genres: [],
+          genres:[],
           trailerId: existingMovieData.trailerId,
           genreId: existingMovieData.genreId,
           runtime: existingMovieData.runtime,
-          collection: existingMovieData.collection,
+          collection: collectionValue,
           language: existingMovieData.language,
           posterUrl: existingMovieData.posterUrl,
           releaseDate: existingMovieData.releaseDate
         })
+        setGenresFromApi(existingMovieData.genres)//addded
       })
-      fetchGenre();//added
+    
     }
   }, [])
 
-  useEffect(() => {
+  useEffect(() => {//added
     const filteredOptions = getFilteredOptions();
     setData(filteredOptions);
-    console.log(filteredOptions)
-  }, [genresFromApi]); //added
-//added
-  const fetchGenre = () => {
-    GenreServices.getGenreForMovie(id).then(
-       (res) => {setGenresFromApi(res.data)
-        console.log(genresFromApi)}
-    )
-}
+    //console.log(filteredOptions)
+  }, [genresFromApi]); 
+
 console.log(data)
 const getExistingGenresValues = () => {//added
   return genresFromApi.map((genre) => genre.category);
@@ -168,7 +164,6 @@ const getFilteredOptions = () => { //added
     setCastInput({ castName: "", roleName: "", castUrl: "" });
     setEditMode(false);
   }
-  console.log(movieData.casts)
   const handleAddCast = () => {
     setCastInput({ castName: "", roleName: "", castUrl: "" });
     setEditMode(true);

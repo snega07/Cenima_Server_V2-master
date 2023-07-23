@@ -11,7 +11,6 @@ const Profile = () => {
     const [isRole, setIsRole] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
     const [reviews, setReviews] = useState([]);
-    const [myReviews, setMyreviews] = useState([]);
     const navigate = useNavigate();
     const [profileData, setProfileData] = useState({
     });
@@ -24,14 +23,13 @@ const Profile = () => {
             const parsedCreds = JSON.parse(storedCreds);
             setCreds(parsedCreds);
             setIsLoggedIn(true);
-           
             setIsRole(parsedCreds.user_role[0].authority);
            fetchReviews();
             setProfileData(parsedCreds.user)
         
         }
     }, []);
-    console.log()
+  
   const fetchReviews = async () => {
     const userId = JSON.parse(localStorage.getItem('user')).user.userId;
     ReviewService.getSpecificReviews(userId)
@@ -44,21 +42,8 @@ const Profile = () => {
                 console.error("Error fetching Reviews:", error);
             });
     };
-    useEffect(() => {
 
-        separateReviews();
-    }, [reviews]);
-
-    const separateReviews = () => {
-        const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-        if (userFromLocalStorage && userFromLocalStorage.user && userFromLocalStorage.user.userName) {
-            const currentUser = userFromLocalStorage.user.userName;
-            const currentUserReviews = reviews.filter((review) => review.username === currentUser);
-            setMyreviews(currentUserReviews);
-        }
-    };
-    console.log(myReviews);
-
+    //console.log(reviews)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -149,7 +134,7 @@ const Profile = () => {
                             <div>
                                 <p className="text-warning">Your reviews</p>
                                 {isRole === "ROLE_USER" ?
-                                    myReviews.length <= 0 ? <p>You haven't added any  reviews yet</p> : myReviews.map((rev, index) => (
+                                    reviews.length <= 0 ? <p>You haven't added any  reviews yet</p> : reviews.map((rev, index) => (
                                         <div className="reviewbox" key={index}>
                                             <div className="row">
                                                 <div className="col"><span>{rev.username}</span></div>

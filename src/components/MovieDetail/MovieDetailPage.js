@@ -36,7 +36,7 @@ const MovieDetailPage = (props) => {
     
     const { isRole, isLoggedIn, token } = location.state;
     console.log(token)
-    const fetchMovies = async () => {
+    const fetchMovies = () => {
         MovieServices.getMovieById(id).then(
             res => changeMovieData(res.data)
         )

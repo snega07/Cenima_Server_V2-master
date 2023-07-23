@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Select from 'react-select';
 import { useNavigate, useParams } from "react-router-dom";
 import MovieServices from "../Services/MovieServices";
+import GenreServices from "../Services/GenreServices";
 
 const MovieForm = (props) => {
   let { id } = useParams();
@@ -31,37 +32,8 @@ const MovieForm = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [editModeIndex, setEditModeIndex] = useState(-1);
   const [unit, setUnit] = useState("");
-
-
-  useEffect(() => {
-
-    if (movieData.id === '_add') {
-      return;
-    }
-    else {
-      MovieServices.getMovieById(movieData.id).then((res) => {
-        let existingMovieData = res.data;
-        setMovieData({
-          title: existingMovieData.title,
-          director: existingMovieData.director,
-          producer: existingMovieData.producer,
-          motionPictureRating: existingMovieData.motionPictureRating,
-          movieDesc: existingMovieData.movieDesc,
-          casts: [],
-          genres: [],
-          trailerId: existingMovieData.trailerId,
-          genreId: existingMovieData.genreId,
-          runtime: existingMovieData.runtime,
-          collection: existingMovieData.collection,
-          language: existingMovieData.language,
-          posterUrl: existingMovieData.posterUrl,
-          releaseDate: existingMovieData.releaseDate
-        })
-      })
-    }
-  }, [])
-
-  const data = [
+  const [genresFromApi,setGenresFromApi] = useState([]); //added
+  const [data,setData]= useState([
     { value: "action", label: "Action" },
     { value: "adventure", label: "Adventure" },
     { value: "animation", label: "Animation" },
@@ -81,13 +53,65 @@ const MovieForm = (props) => {
     { value: "biographical", label: "Biographical" },
     { value: "documentary", label: "Documentary" },
     { value: "sports", label: "Sports" },
-  ];
+  ]);
 
+
+  useEffect(() => {
+
+    if (movieData.id === '_add') {
+      return;
+    }
+    else {
+      
+      MovieServices.getMovieById(movieData.id).then((res) => {
+        let existingMovieData = res.data;
+        setMovieData({
+          title: existingMovieData.title,
+          director: existingMovieData.director,
+          producer: existingMovieData.producer,
+          motionPictureRating: existingMovieData.motionPictureRating,
+          movieDesc: existingMovieData.movieDesc,
+          casts: [],
+          genres: [],
+          trailerId: existingMovieData.trailerId,
+          genreId: existingMovieData.genreId,
+          runtime: existingMovieData.runtime,
+          collection: existingMovieData.collection,
+          language: existingMovieData.language,
+          posterUrl: existingMovieData.posterUrl,
+          releaseDate: existingMovieData.releaseDate
+        })
+      })
+      fetchGenre();//added
+    }
+  }, [])
+
+  useEffect(() => {
+    const filteredOptions = getFilteredOptions();
+    setData(filteredOptions);
+    console.log(filteredOptions)
+  }, [genresFromApi]); //added
+//added
+  const fetchGenre = () => {
+    GenreServices.getGenreForMovie(id).then(
+       (res) => {setGenresFromApi(res.data)
+        console.log(genresFromApi)}
+    )
+}
+console.log(data)
+const getExistingGenresValues = () => {//added
+  return genresFromApi.map((genre) => genre.category);
+};
+
+const getFilteredOptions = () => { //added
+  const existingGenresValues = getExistingGenresValues();
+ // console.log(existingGenresValues);
+  return data.filter((genre) => !existingGenresValues.includes(genre.value));
+};
 
   const handleGenreChange = (selectedOptions) => {
     const selectedGenres = selectedOptions.map(option => ({ category: option.value }));
     setSelectedValue(selectedGenres);
-
     setMovieData((prevState) => ({
       ...prevState,
       genres: selectedGenres
